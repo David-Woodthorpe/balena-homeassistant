@@ -6,8 +6,9 @@ services:
   homeassistant:
     build: homeassistant
     ports:
-      - 80:8123
+      - 8123:8123
     privileged: true
+    network: host
     volumes:
       - 'config:/config'
     restart: always
@@ -16,11 +17,13 @@ services:
     ports:
       - "1883:1883"
     restart: always
+    network: host
     volumes:
       - mosquitto:/mosquitto/data
   hass-configurator:
     image: "causticlab/hass-configurator-docker:latest"
     restart: always
+    network: host
     ports:
       - "3218:3218"
     volumes:
